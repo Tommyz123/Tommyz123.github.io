@@ -1,244 +1,389 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tom Z — LLM Agent &amp; AI Chatbot Developer</title>
-<meta name="description" content="Shipped LLM products with receipts: grounded retrieval, eval harnesses in CI, compliance guardrails, verifiable data pipelines.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --bg:#0a0a0c; --panel:#131316; --panel2:#17171b; --line:#26262b;
-    --ink:#f4f4f5; --dim:#9ca0ab; --accent:#3b82f6; --verify:#22c55e;
-    --mono:'IBM Plex Mono',ui-monospace,monospace;
-  }
-  * { box-sizing:border-box; margin:0; }
-  html { scroll-behavior:smooth; }
-  body { background:var(--bg); color:var(--ink);
-         font:16px/1.65 'Archivo',-apple-system,'Segoe UI',sans-serif;
-         -webkit-font-smoothing:antialiased; }
-  h1,h2,h3 { font-family:'Space Grotesk',sans-serif; }
-  a { color:var(--accent); }
-  .wrap { max-width:1080px; margin:0 auto; padding:0 24px; }
-
-  /* ---------- hero ---------- */
-  .hero { padding:96px 0 64px; }
-  .eyebrow { font-family:var(--mono); font-size:13px; color:var(--dim); letter-spacing:.08em; }
-  .eyebrow b { color:var(--ink); font-weight:500; }
-  h1 { font-size:clamp(34px,5.4vw,56px); line-height:1.14; letter-spacing:-.02em;
-       font-weight:700; margin:26px 0 20px; max-width:820px; }
-  .claim { position:relative; white-space:nowrap;
-           border-bottom:2px solid var(--verify); }
-  .sub { color:var(--dim); font-size:18px; max-width:620px; margin-bottom:34px; }
-  .cta-row { display:flex; gap:12px; flex-wrap:wrap; }
-  .btn { display:inline-flex; align-items:center; gap:8px; min-height:44px;
-         padding:10px 22px; border-radius:10px; font-size:15px; font-weight:500;
-         text-decoration:none; cursor:pointer; transition:background .2s,border-color .2s,transform .15s; }
-  .btn:hover { transform:translateY(-1px); }
-  .btn:focus-visible, a:focus-visible { outline:2px solid var(--accent); outline-offset:3px; }
-  .btn.primary { background:var(--accent); color:#fff; }
-  .btn.primary:hover { background:#2f6fe0; }
-  .btn.ghost { border:1px solid var(--line); color:var(--ink); }
-  .btn.ghost:hover { border-color:var(--dim); }
-
-  /* ---------- signature: evidence ledger ---------- */
-  .ledger { margin:64px 0 0; border:1px solid var(--line); border-radius:14px;
-            background:var(--panel); overflow:hidden; }
-  .ledger-head { display:flex; justify-content:space-between; align-items:center;
-                 padding:14px 22px; border-bottom:1px solid var(--line);
-                 font-family:var(--mono); font-size:12.5px; color:var(--dim); letter-spacing:.06em; }
-  .ledger-head .stamp { color:var(--verify); border:1px solid var(--verify);
-                        border-radius:6px; padding:2px 10px; font-weight:500; }
-  .row { display:flex; align-items:baseline; gap:14px; padding:15px 22px;
-         font-family:var(--mono); font-size:14px; border-bottom:1px solid var(--line);
-         color:var(--dim); flex-wrap:wrap; }
-  .row:last-child { border-bottom:0; }
-  .row .k { color:var(--ink); min-width:220px; }
-  .row .leader { flex:1; border-bottom:1px dotted var(--line); transform:translateY(-4px); min-width:40px; }
-  .row a.proof { display:inline-flex; align-items:center; gap:7px; color:var(--dim);
-                 text-decoration:none; padding:2px 4px; }
-  .row a.proof:hover { color:var(--ink); }
-  .tick { width:15px; height:15px; flex:none; opacity:0; transform:scale(.4); }
-  .tick path { stroke:var(--verify); stroke-width:2.4; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-  .loaded .tick { animation:pop .35s ease forwards; }
-  .loaded .row:nth-child(2) .tick { animation-delay:.15s } /* rows start after head */
-  .loaded .row:nth-child(3) .tick { animation-delay:.3s }
-  .loaded .row:nth-child(4) .tick { animation-delay:.45s }
-  @keyframes pop { to { opacity:1; transform:scale(1); } }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior:auto; }
-    .tick { opacity:1 !important; transform:none !important; animation:none !important; }
-    .btn, .shot { transition:none !important; }
-  }
-
-  /* ---------- work ---------- */
-  .work { padding:88px 0 8px; }
-  .sect { font-family:var(--mono); font-size:13px; letter-spacing:.1em; color:var(--dim);
-          margin-bottom:44px; }
-  .sect::before { content:'// '; color:var(--verify); }
-  .project { display:grid; grid-template-columns:1.12fr 1fr; gap:48px; align-items:center;
-             margin-bottom:96px; }
-  .project.flip .shot { order:2; }
-  @media (max-width:880px) {
-    .project, .project.flip .shot { display:block; order:0; }
-    .project .shot { margin-bottom:26px; }
-    .row .k { min-width:0; }
-  }
-  .shot { display:block; border-radius:12px; background:var(--panel); border:1px solid var(--line);
-          box-shadow:0 20px 50px rgba(0,0,0,.5); overflow:hidden; text-decoration:none;
-          transition:transform .25s ease, border-color .25s ease; cursor:pointer; }
-  .shot:hover { transform:translateY(-5px); border-color:#34343b; }
-  .chrome { display:flex; align-items:center; gap:7px; padding:10px 14px;
-            background:var(--panel2); border-bottom:1px solid var(--line); }
-  .dot { width:10px; height:10px; border-radius:50%; background:#3a3a41; }
-  .url { flex:1; margin-left:8px; background:rgba(255,255,255,.04); border-radius:6px;
-         font-family:var(--mono); font-size:11.5px; color:var(--dim); padding:4px 12px;
-         white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .shot img { display:block; width:100%; }
-
-  .info h2 { font-size:27px; letter-spacing:-.01em; margin-bottom:8px; }
-  .kicker { font-family:var(--mono); font-size:13px; color:var(--verify); margin-bottom:14px; }
-  .info p.desc { color:var(--dim); margin-bottom:18px; }
-  .points { list-style:none; padding:0; margin:0 0 20px; }
-  .points li { display:flex; gap:10px; margin-bottom:10px; color:var(--dim); font-size:15px; }
-  .points li svg { width:16px; height:16px; flex:none; margin-top:4px; }
-  .points li svg path { stroke:var(--verify); stroke-width:2.2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-  .points li b { color:var(--ink); font-weight:600; }
-  .chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:22px; }
-  .chip { font-family:var(--mono); font-size:12px; color:var(--dim); border:1px solid var(--line);
-          padding:4px 12px; border-radius:6px; }
-  .note { font-family:var(--mono); font-size:12px; color:var(--dim); margin-top:12px; }
-
-  /* ---------- about + contact ---------- */
-  .about { border-top:1px solid var(--line); padding:64px 0; }
-  .about .wrap { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
-  @media (max-width:880px){ .about .wrap { display:block; } .about h2 { margin-bottom:18px; } }
-  .about h2 { font-size:24px; }
-  .about p { color:var(--dim); margin-bottom:14px; }
-  .about p b { color:var(--ink); font-weight:600; }
-  .contact { border-top:1px solid var(--line); padding:56px 0 72px; text-align:center; }
-  .contact h2 { font-size:26px; margin-bottom:10px; }
-  .contact p { color:var(--dim); margin-bottom:24px; }
-  footer { font-family:var(--mono); font-size:12px; color:#5a5e68; text-align:center;
-           padding-bottom:30px; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tommy Z — LLM Agent & AI Chatbot Developer</title>
+  <meta name="description" content="Shipped LLM products: custom RAG with source citations, eval harnesses in CI, compliance guardrails, verifiable data pipelines. New York City.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3B82F6',
+            secondary: '#1E293B',
+            cta: '#2563EB',
+            background: '#0F172A',
+            surface: '#1E293B',
+            text: '#F1F5F9',
+            muted: '#94A3B8',
+          },
+          fontFamily: {
+            heading: ['Space Grotesk', 'sans-serif'],
+            body: ['Archivo', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-glow:hover {
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.15);
+    }
+  </style>
 </head>
-<body>
-
-<section class="hero">
-  <div class="wrap">
-    <div class="eyebrow"><b>TOM Z</b> — LLM AGENT &amp; AI CHATBOT DEVELOPER · NEW YORK CITY</div>
-    <h1>Anyone can claim their AI works.<br>I ship the <span class="claim">receipts</span>.</h1>
-    <p class="sub">Grounded retrieval with source citations, eval harnesses running in CI,
-    compliance guardrails, and data pipelines that record failures instead of inventing numbers.</p>
-    <div class="cta-row">
-      <a class="btn primary" href="#work">See the work</a>
-      <a class="btn ghost" href="https://github.com/Tommyz123">GitHub</a>
-    </div>
-
-    <div class="ledger" id="ledger" aria-label="Claims and their verifiable evidence">
-      <div class="ledger-head"><span>CLAIMS LEDGER — every claim links to its evidence</span>
-        <span class="stamp">VERIFIED</span></div>
-      <div class="row"><span class="k">2 products live in production</span><span class="leader"></span>
-        <a class="proof" href="https://cannabis-ai-budtender.onrender.com"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg>open demo #1</a>
-        <a class="proof" href="https://tommyz123.github.io/serp-rank-tracker/"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg>open demo #2</a></div>
-      <div class="row"><span class="k">148 automated tests in CI</span><span class="leader"></span>
-        <a class="proof" href="https://github.com/Tommyz123/Cannabis-AI-Budtender/actions"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg>see the runs</a></div>
-      <div class="row"><span class="k">Every data point traceable</span><span class="leader"></span>
-        <a class="proof" href="https://tommyz123.github.io/serp-rank-tracker/"><svg class="tick" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg>audit a live number</a></div>
-    </div>
-  </div>
-</section>
-
-<div class="work wrap" id="work">
-  <div class="sect">SELECTED WORK — both live, click through and try them</div>
-
-  <div class="project">
-    <a class="shot" href="https://cannabis-ai-budtender.onrender.com">
-      <span class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="url">cannabis-ai-budtender.onrender.com</span></span>
-      <img src="assets/budtender.png" alt="Cannabis AI Budtender — chat interface recommending products from live inventory">
-    </a>
-    <div class="info">
-      <h2>Cannabis AI Budtender</h2>
-      <div class="kicker">LLM agent for a regulated industry</div>
-      <p class="desc">A conversational product advisor for a New York cannabis dispensary —
-      it recommends from real inventory and stays inside compliance lines.</p>
-      <ul class="points">
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg><span><b>Structured-SQL retrieval</b> over a live 217-product catalog, every answer with source citations</span></li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg><span><b>Compliance guardrails</b> — no medical claims, age gating; 6/6 compliance evals, ~95% overall eval accuracy</span></li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg><span><b>148 automated tests</b> in GitHub Actions CI; rate-limited FastAPI backend on Render</span></li>
-      </ul>
-      <div class="chips"><span class="chip">Python</span><span class="chip">FastAPI</span>
-        <span class="chip">OpenAI API</span><span class="chip">SQLite</span>
-        <span class="chip">eval harness</span><span class="chip">CI</span></div>
-      <div class="cta-row">
-        <a class="btn primary" href="https://cannabis-ai-budtender.onrender.com">Open live demo</a>
-        <a class="btn ghost" href="https://tommyz123.github.io/Cannabis-AI-Budtender/">Case study</a>
-        <a class="btn ghost" href="https://github.com/Tommyz123/Cannabis-AI-Budtender">Source</a>
+<body class="bg-background font-body text-text antialiased">
+  <!-- Floating Navbar -->
+  <nav class="fixed top-6 left-6 right-6 z-50 bg-surface/80 backdrop-blur-xl rounded-2xl border border-white/5">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="#" class="font-heading font-bold text-xl text-text cursor-pointer">
+        <span class="gradient-text">TZ</span>
+      </a>
+      <div class="hidden md:flex items-center gap-8">
+        <a href="#work" class="text-muted hover:text-text transition-colors duration-200 cursor-pointer">Work</a>
+        <a href="#skills" class="text-muted hover:text-text transition-colors duration-200 cursor-pointer">Skills</a>
+        <a href="#about" class="text-muted hover:text-text transition-colors duration-200 cursor-pointer">About</a>
+        <a href="#contact" class="text-muted hover:text-text transition-colors duration-200 cursor-pointer">Contact</a>
       </div>
-      <p class="note">free-tier hosting — first load may take ~50s to wake</p>
+      <a href="#contact" class="bg-primary hover:bg-cta text-white font-medium px-5 py-2.5 rounded-xl transition-colors duration-200 cursor-pointer">
+        Let's Talk
+      </a>
     </div>
-  </div>
+  </nav>
 
-  <div class="project flip">
-    <a class="shot" href="https://tommyz123.github.io/serp-rank-tracker/">
-      <span class="chrome"><span class="dot"></span><span class="dot"></span><span class="dot"></span>
-        <span class="url">tommyz123.github.io/serp-rank-tracker</span></span>
-      <img src="assets/rank-tracker.png" alt="SERP Rank Tracker — data-integrity dashboard with rank trends">
-    </a>
-    <div class="info">
-      <h2>SERP Rank Tracker</h2>
-      <div class="kicker">records failures instead of inventing rankings</div>
-      <p class="desc">Daily Google rank tracking with an audit trail — honest data as the
-      headline feature, for SEO teams tired of smoothed-over charts.</p>
-      <ul class="points">
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg><span><b>Failed fetches stay FAILED</b> — 3 labeled retries, then a recorded gap; never interpolated</span></li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg><span><b>Every position traces</b> to an archived raw API response, with a per-row verification drawer</span></li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7-8"/></svg><span><b>Real data daily</b> via cron; demo backfill kept as a separate, clearly-labeled layer; CSV export</span></li>
-      </ul>
-      <div class="chips"><span class="chip">Python</span><span class="chip">SerpAPI</span>
-        <span class="chip">SQLite</span><span class="chip">static dashboard</span>
-        <span class="chip">GitHub Pages</span></div>
-      <div class="cta-row">
-        <a class="btn primary" href="https://tommyz123.github.io/serp-rank-tracker/">Open live dashboard</a>
-        <a class="btn ghost" href="https://github.com/Tommyz123/serp-rank-tracker">Source</a>
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center px-6 pt-32 pb-20">
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div>
+          <p class="text-primary font-medium mb-4 tracking-wide">LLM Agent &amp; AI Chatbot Developer</p>
+          <h1 class="font-heading text-5xl md:text-7xl font-bold text-text mb-6 leading-tight">
+            Hi, I'm<br>
+            <span class="gradient-text">Tommy Z.</span>
+          </h1>
+          <p class="text-muted text-lg md:text-xl leading-relaxed mb-10 max-w-lg">
+            I ship LLM products that can prove what they claim — custom RAG with source citations, eval harnesses in CI, compliance guardrails, and data pipelines that record failures instead of inventing numbers. Based in New York City.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#work" class="bg-primary hover:bg-cta text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer inline-flex items-center gap-2">
+              View My Work
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+              </svg>
+            </a>
+            <a href="https://github.com/Tommyz123" class="border border-white/10 hover:border-white/20 text-text font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer">
+              GitHub
+            </a>
+          </div>
+
+          <!-- Social Links -->
+          <div class="flex gap-4 mt-12">
+            <a href="https://github.com/Tommyz123" class="w-12 h-12 rounded-xl bg-surface border border-white/5 flex items-center justify-center text-muted hover:text-primary hover:border-primary/30 transition-all duration-200 cursor-pointer" aria-label="GitHub">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="relative">
+          <div class="aspect-square rounded-3xl bg-gradient-to-br from-primary/20 to-purple-600/20 border border-white/5 overflow-hidden">
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="w-64 h-64 rounded-full bg-gradient-to-br from-primary to-purple-600 opacity-80 blur-3xl"></div>
+            </div>
+            <div class="relative z-10 h-full flex items-center justify-center">
+              <div class="w-48 h-48 rounded-full bg-surface border-4 border-primary/30 flex items-center justify-center">
+                <span class="font-heading text-6xl font-bold gradient-text">TZ</span>
+              </div>
+            </div>
+          </div>
+          <!-- Floating Elements -->
+          <div class="absolute -top-4 -right-4 w-20 h-20 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center">
+            <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+            </svg>
+          </div>
+          <div class="absolute -bottom-4 -left-4 w-16 h-16 rounded-2xl bg-purple-600/10 border border-purple-600/20 flex items-center justify-center">
+            <svg class="w-6 h-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 01-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 014.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0112 15a9.065 9.065 0 00-6.23-.693L5 14.5m14.8.8l1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0112 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/>
+            </svg>
+          </div>
+        </div>
       </div>
-      <p class="note">refreshes daily with real collected rankings</p>
     </div>
-  </div>
-</div>
+  </section>
 
-<section class="about">
-  <div class="wrap">
-    <div>
-      <h2>Why the receipts obsession?</h2>
+  <!-- Work Section -->
+  <section id="work" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-primary font-medium mb-3">Portfolio</p>
+        <h2 class="font-heading text-4xl md:text-5xl font-bold text-text">Featured Projects</h2>
+        <p class="text-muted mt-4">Both are live — click through and try them.</p>
+      </div>
+
+      <!-- Project Grid -->
+      <div class="grid md:grid-cols-2 gap-8">
+        <!-- Project 1: Budtender -->
+        <a href="https://cannabis-ai-budtender.onrender.com" class="group bg-surface rounded-3xl border border-white/5 overflow-hidden card-glow transition-all duration-300 cursor-pointer block">
+          <div class="aspect-video relative overflow-hidden">
+            <img src="assets/budtender.png" alt="Cannabis AI Budtender — chat interface recommending products from live inventory" class="w-full h-full object-cover object-top">
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/80 backdrop-blur-sm">
+              <span class="text-text font-medium flex items-center gap-2">
+                Open live demo
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm">Python</span>
+              <span class="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-sm">FastAPI</span>
+              <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm">OpenAI API</span>
+              <span class="px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm">RAG</span>
+            </div>
+            <h3 class="font-heading text-2xl font-bold text-text mb-3">Cannabis AI Budtender</h3>
+            <p class="text-muted leading-relaxed mb-4">LLM agent for a regulated industry: conversational product advisor for a NY dispensary. Structured-SQL retrieval over a live 217-product catalog with source citations, compliance guardrails (6/6 compliance evals, ~95% overall eval accuracy), 148 automated tests in CI.</p>
+            <div class="flex flex-wrap gap-4 text-sm">
+              <span class="text-primary">Live demo ↗</span>
+              <span class="text-muted hover:text-text" onclick="event.preventDefault(); window.open('https://tommyz123.github.io/Cannabis-AI-Budtender/','_blank')">Case study</span>
+              <span class="text-muted hover:text-text" onclick="event.preventDefault(); window.open('https://github.com/Tommyz123/Cannabis-AI-Budtender','_blank')">Source</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Project 2: SERP Rank Tracker -->
+        <a href="https://tommyz123.github.io/serp-rank-tracker/" class="group bg-surface rounded-3xl border border-white/5 overflow-hidden card-glow transition-all duration-300 cursor-pointer block">
+          <div class="aspect-video relative overflow-hidden">
+            <img src="assets/rank-tracker.png" alt="SERP Rank Tracker — data-integrity dashboard with rank trends" class="w-full h-full object-cover object-top">
+            <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-background/80 backdrop-blur-sm">
+              <span class="text-text font-medium flex items-center gap-2">
+                Open live dashboard
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div class="p-8">
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-sm">Python</span>
+              <span class="px-3 py-1 rounded-full bg-orange-500/10 text-orange-400 text-sm">SerpAPI</span>
+              <span class="px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm">SQLite</span>
+              <span class="px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm">GitHub Pages</span>
+            </div>
+            <h3 class="font-heading text-2xl font-bold text-text mb-3">SERP Rank Tracker</h3>
+            <p class="text-muted leading-relaxed mb-4">A Google rank tracker that records failures instead of inventing rankings. Failed fetches stay FAILED with labeled retries; every position traces to an archived raw API response with a per-row verification drawer. Real data collected daily by cron, CSV export included.</p>
+            <div class="flex flex-wrap gap-4 text-sm">
+              <span class="text-primary">Live dashboard ↗</span>
+              <span class="text-muted hover:text-text" onclick="event.preventDefault(); window.open('https://github.com/Tommyz123/serp-rank-tracker','_blank')">Source</span>
+            </div>
+          </div>
+        </a>
+      </div>
     </div>
-    <div>
-      <p>Most AI demos are a leap of faith: a chat window, a confident answer, and no way to
-      tell whether it's grounded or hallucinated. <b>I build the paper trail in from day one</b> —
-      citations you can click, eval suites that run on every commit, failures stored as
-      failures.</p>
-      <p>If you're hiring for custom RAG, an AI chatbot, an LLM agent, or an API integration,
-      you get the same deal: <b>a product that can prove what it claims.</b></p>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="py-24 px-6 bg-surface/50">
+    <div class="max-w-6xl mx-auto">
+      <div class="text-center mb-16">
+        <p class="text-primary font-medium mb-3">Expertise</p>
+        <h2 class="font-heading text-4xl md:text-5xl font-bold text-text">Skills &amp; Technologies</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- AI / LLM -->
+        <div class="bg-surface p-8 rounded-3xl border border-white/5">
+          <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-text mb-4">AI &amp; LLM</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">OpenAI API</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Claude API</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">RAG &amp; grounding</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Eval harnesses</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Compliance guardrails</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Prompt engineering</span>
+          </div>
+        </div>
+
+        <!-- Backend & Data -->
+        <div class="bg-surface p-8 rounded-3xl border border-white/5">
+          <div class="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-text mb-4">Backend &amp; Data</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Python</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">FastAPI</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">SQLite</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">REST APIs</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">API integrations</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Web scraping</span>
+          </div>
+        </div>
+
+        <!-- Tools & Delivery -->
+        <div class="bg-surface p-8 rounded-3xl border border-white/5">
+          <div class="w-14 h-14 rounded-2xl bg-purple-500/10 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-text mb-4">Tools &amp; Delivery</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Git</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">GitHub Actions CI</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Playwright</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Render</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">GitHub Pages</span>
+            <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Linux / cron</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="contact">
-  <div class="wrap">
-    <h2>Have a project in mind?</h2>
-    <p>Tell me what you need it to prove.</p>
-    <a class="btn primary" href="https://github.com/Tommyz123">Find me on GitHub</a>
-  </div>
-</section>
+  <!-- About Section -->
+  <section id="about" class="py-24 px-6">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1">
+          <p class="text-primary font-medium mb-3">About Me</p>
+          <h2 class="font-heading text-4xl md:text-5xl font-bold text-text mb-6">Products that prove what they claim</h2>
+          <p class="text-muted text-lg leading-relaxed mb-6">
+            Most AI demos are a leap of faith: a chat window, a confident answer, and no way to tell whether it's grounded or hallucinated. I build the paper trail in from day one — citations you can click, eval suites that run on every commit, failures stored as failures.
+          </p>
+          <p class="text-muted text-lg leading-relaxed mb-8">
+            If you're hiring for custom RAG, an AI chatbot, an LLM agent, or an API integration, you get the same deal: working software, and the receipts to check it.
+          </p>
+          <div class="grid grid-cols-3 gap-8">
+            <div>
+              <div class="font-heading text-4xl font-bold gradient-text mb-2">2</div>
+              <div class="text-muted text-sm">Products Live in Production</div>
+            </div>
+            <div>
+              <div class="font-heading text-4xl font-bold gradient-text mb-2">148</div>
+              <div class="text-muted text-sm">Automated Tests in CI</div>
+            </div>
+            <div>
+              <div class="font-heading text-4xl font-bold gradient-text mb-2">100%</div>
+              <div class="text-muted text-sm">Data Points Traceable to Source</div>
+            </div>
+          </div>
+        </div>
+        <div class="order-1 lg:order-2">
+          <div class="aspect-square rounded-3xl bg-gradient-to-br from-primary/10 to-purple-600/10 border border-white/5 p-8 flex items-center justify-center">
+            <div class="text-center">
+              <div class="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-purple-600 mx-auto mb-6 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <blockquote class="text-text text-lg italic">"Anyone can claim their AI works. I ship the receipts."</blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<footer>© 2026 TOM Z · NYC — this page: no tracker, no framework, one HTML file</footer>
+  <!-- Contact Section -->
+  <section id="contact" class="py-24 px-6 bg-surface/50">
+    <div class="max-w-4xl mx-auto text-center">
+      <p class="text-primary font-medium mb-3">Get In Touch</p>
+      <h2 class="font-heading text-4xl md:text-5xl font-bold text-text mb-6">Let's Work Together</h2>
+      <p class="text-muted text-lg mb-12 max-w-2xl mx-auto">
+        Have a project in mind? Tell me what you need it to prove. I work async-first and reply fast.
+      </p>
+      <form id="contact-form" class="bg-surface rounded-3xl border border-white/5 p-8 md:p-12 text-left">
+        <input type="hidden" name="access_key" value="53babfba-9925-4570-99c5-2974a12ab85b">
+        <input type="hidden" name="subject" value="New portfolio contact from tommyz123.github.io">
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label for="name" class="block text-sm font-medium text-text mb-2">Name</label>
+            <input type="text" id="name" name="name" required class="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" placeholder="Your name">
+          </div>
+          <div>
+            <label for="email" class="block text-sm font-medium text-text mb-2">Email</label>
+            <input type="email" id="email" name="email" required class="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="mb-8">
+          <label for="message" class="block text-sm font-medium text-text mb-2">Message</label>
+          <textarea id="message" name="message" rows="5" required class="w-full px-4 py-3 rounded-xl bg-background border border-white/10 text-text placeholder-muted focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-200 resize-none" placeholder="Tell me about your project — what should it prove?"></textarea>
+        </div>
+        <button type="submit" class="w-full bg-primary hover:bg-cta text-white font-semibold py-4 rounded-xl transition-colors duration-200 cursor-pointer">
+          Send Message
+        </button>
+        <p id="form-status" class="text-center text-sm mt-4 text-muted" role="status"></p>
+      </form>
+      <script>
+        document.getElementById('contact-form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const form = e.target, status = document.getElementById('form-status'),
+                btn = form.querySelector('button[type="submit"]');
+          btn.disabled = true; status.textContent = 'Sending…';
+          try {
+            const res = await fetch('https://api.web3forms.com/submit', {
+              method: 'POST', body: new FormData(form),
+              headers: { 'Accept': 'application/json' }
+            });
+            const data = await res.json();
+            if (data.success) {
+              status.textContent = "Message sent — I'll get back to you soon.";
+              status.className = 'text-center text-sm mt-4 text-green-400';
+              form.reset();
+            } else { throw new Error(data.message || 'Submission failed'); }
+          } catch (err) {
+            status.textContent = 'Could not send (' + err.message + '). Email me via GitHub instead.';
+            status.className = 'text-center text-sm mt-4 text-red-400';
+          }
+          btn.disabled = false;
+        });
+      </script>
+    </div>
+  </section>
 
-<script>
-  addEventListener('load', () => document.getElementById('ledger').classList.add('loaded'));
-</script>
+  <!-- Footer -->
+  <footer class="py-12 px-6 border-t border-white/5">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      <div class="flex items-center gap-2">
+        <span class="font-heading font-bold text-xl gradient-text">TZ</span>
+        <span class="text-muted">Tommy Z.</span>
+      </div>
+      <p class="text-muted text-sm">© 2026 Tommy Z. · New York City</p>
+      <div class="flex gap-4">
+        <a href="https://github.com/Tommyz123" class="text-muted hover:text-text transition-colors duration-200 cursor-pointer" aria-label="GitHub">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
