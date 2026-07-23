@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tommy Z — LLM Agent & AI Chatbot Developer</title>
+  <title>Tommy Z — AI Assistants & Data Tools for Small Businesses</title>
   <meta name="description" content="AI assistants and data tools for small businesses — chatbots that answer customers correctly and show their sources, and reports with real numbers. New York City.">
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -81,14 +81,14 @@
             I build AI assistants and data tools for small businesses. Chatbots that answer your customers correctly — and can show where every answer came from. Reports with real numbers, never made-up ones. Based in New York City.
           </p>
           <div class="flex flex-wrap gap-4">
-            <a href="#work" class="bg-primary hover:bg-cta text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer inline-flex items-center gap-2">
-              View My Work
+            <a href="#contact" class="bg-primary hover:bg-cta text-white font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer inline-flex items-center gap-2">
+              Tell Me Your Business Problem
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
               </svg>
             </a>
-            <a href="https://github.com/Tommyz123" class="border border-white/10 hover:border-white/20 text-text font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer">
-              GitHub
+            <a href="#work" class="border border-white/10 hover:border-white/20 text-text font-semibold px-8 py-4 rounded-xl transition-colors duration-200 cursor-pointer">
+              View My Work
             </a>
           </div>
 
@@ -134,7 +134,7 @@
       <div class="text-center mb-16">
         <p class="text-primary font-medium mb-3">Portfolio</p>
         <h2 class="font-heading text-4xl md:text-5xl font-bold text-text">Featured Projects</h2>
-        <p class="text-muted mt-4">Both are live — click through and try them.</p>
+        <p class="text-muted mt-4">Both are live — click through and try them. Built for a dispensary and an SEO team, but the same patterns work for clinics, salons, stores, and any local service business.</p>
       </div>
 
       <!-- Project Grid -->
@@ -161,6 +161,7 @@
             </div>
             <h3 class="font-heading text-2xl font-bold text-text mb-3">Cannabis AI Budtender</h3>
             <p class="text-muted leading-relaxed mb-4">A 24/7 AI shop assistant for a New York cannabis dispensary. It knows all 217 products in the store, helps customers find the right one, and never gives advice that breaks state rules. Every answer shows which product it came from.</p>
+            <p class="text-muted/70 text-xs mb-4">Hosted on a free tier — the demo may take up to a minute to wake up on first open.</p>
             <div class="flex flex-wrap gap-4 text-sm">
               <span class="text-primary">Live demo ↗</span>
               <span class="text-muted hover:text-text" onclick="event.preventDefault(); window.open('https://tommyz123.github.io/Cannabis-AI-Budtender/','_blank')">Case study</span>
@@ -219,7 +220,7 @@
             </svg>
           </div>
           <h3 class="font-heading text-xl font-bold text-text mb-3">AI Assistants &amp; Chatbots</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">Answer customers 24/7, cite their sources, and follow your industry's rules.</p>
+          <p class="text-muted text-sm leading-relaxed mb-4">Website customer Q&amp;A, product finders, document helpdesks. You get a live chat trained on your own content, embedded on your site, with sources shown for every answer.</p>
           <div class="flex flex-wrap gap-2">
             <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">OpenAI API</span>
             <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Claude API</span>
@@ -238,7 +239,7 @@
             </svg>
           </div>
           <h3 class="font-heading text-xl font-bold text-text mb-3">Data &amp; Reporting</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">Collect data daily, chart it, export it — with an audit trail.</p>
+          <p class="text-muted text-sm leading-relaxed mb-4">Google-ranking monitors, daily sales or inventory reports, dashboards. You get a live dashboard that updates automatically, plus spreadsheet export — with an audit trail.</p>
           <div class="flex flex-wrap gap-2">
             <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Python</span>
             <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">FastAPI</span>
@@ -258,7 +259,7 @@
             </svg>
           </div>
           <h3 class="font-heading text-xl font-bold text-text mb-3">Integrations &amp; Delivery</h3>
-          <p class="text-muted text-sm leading-relaxed mb-4">Connect the tools you already use — shipped reliably and kept running.</p>
+          <p class="text-muted text-sm leading-relaxed mb-4">Connect your website, store system, or CRM to the tools above. Small fixed-scope builds welcome — prototypes, automations, internal tools.</p>
           <div class="flex flex-wrap gap-2">
             <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">Git</span>
             <span class="px-3 py-2 rounded-lg bg-background text-muted text-sm">GitHub Actions CI</span>
@@ -296,7 +297,7 @@
             </div>
             <div>
               <div class="font-heading text-4xl font-bold gradient-text mb-2">100%</div>
-              <div class="text-muted text-sm">Every number traceable to its source</div>
+              <div class="text-muted text-sm">Demo data points traceable to their source</div>
             </div>
           </div>
         </div>
@@ -365,7 +366,7 @@
               form.reset();
             } else { throw new Error(data.message || 'Submission failed'); }
           } catch (err) {
-            status.textContent = 'Could not send (' + err.message + '). Email me via GitHub instead.';
+            status.textContent = 'Could not send (' + err.message + '). Please open an issue or discussion at github.com/Tommyz123 and I will reply.';
             status.className = 'text-center text-sm mt-4 text-red-400';
           }
           btn.disabled = false;
