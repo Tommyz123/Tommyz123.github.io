@@ -104,10 +104,28 @@
           </div>
         </div>
 
-        <!-- Hero Image -->
-        <div class="relative flex justify-center lg:justify-end">
-          <div class="relative w-72 md:w-80 aspect-square rounded-3xl p-2 bg-gradient-to-br from-primary/20 to-purple-600/20 border border-white/10 shadow-2xl ring-1 ring-inset ring-white/10">
-            <img src="assets/tomz-avatar.png" alt="Tomz — brand mascot avatar" class="relative z-10 w-full h-full object-cover rounded-2xl">
+        <!-- Hero Image: brand mascot + real product proof -->
+        <div class="relative flex flex-col items-center lg:items-end gap-5">
+          <!-- Real product screenshot (the proof) -->
+          <div class="relative w-full max-w-md rounded-3xl p-2 bg-gradient-to-br from-primary/20 to-purple-600/20 border border-white/10 shadow-2xl ring-1 ring-inset ring-white/10">
+            <img src="assets/budtender.png" alt="Cannabis AI Budtender — live chat recommending products with sources" class="relative z-10 w-full rounded-2xl object-cover">
+            <!-- Mascot badge, kept as brand anchor -->
+            <img src="assets/tomz-avatar-sm.png" alt="Tomz mascot" class="absolute -bottom-4 -right-4 w-16 h-16 rounded-full border-2 border-primary/40 shadow-lg z-20">
+          </div>
+          <!-- Trust strip: real numbers under the proof -->
+          <div class="flex gap-6 text-center">
+            <div>
+              <div class="font-heading text-2xl font-bold gradient-text">2</div>
+              <div class="text-muted text-xs">Live products</div>
+            </div>
+            <div>
+              <div class="font-heading text-2xl font-bold gradient-text">217</div>
+              <div class="text-muted text-xs">Products the AI knows</div>
+            </div>
+            <div>
+              <div class="font-heading text-2xl font-bold gradient-text">100%</div>
+              <div class="text-muted text-xs">Answers with sources</div>
+            </div>
           </div>
         </div>
       </div>
@@ -198,8 +216,9 @@
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <!-- AI / LLM -->
-        <div class="bg-surface p-8 rounded-3xl border border-white/5">
+        <!-- AI / LLM — flagship, visually emphasized -->
+        <div class="relative bg-surface p-8 rounded-3xl border border-primary/40 ring-1 ring-primary/20 shadow-[0_0_40px_rgba(59,130,246,0.12)]">
+          <span class="absolute top-6 right-6 px-3 py-1 rounded-full bg-primary/15 text-primary text-xs font-medium">Core strength</span>
           <div class="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
             <svg class="w-7 h-7 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"/>
@@ -309,7 +328,7 @@
       <p class="text-primary font-medium mb-3">Get In Touch</p>
       <h2 class="font-heading text-4xl md:text-5xl font-bold text-text mb-6">Let's Work Together</h2>
       <p class="text-muted text-lg mb-12 max-w-2xl mx-auto">
-        Have a project in mind — or not sure what's possible with AI for your business? Describe your problem in plain words. I'll tell you honestly whether AI can solve it, and what it would take.
+        Have a project in mind — or not sure what's possible with AI for your business? Describe your problem in plain words. I'll tell you honestly whether AI can solve it, and what it would take. <span class="text-text/80">I usually reply within 24 hours.</span>
       </p>
       <form id="contact-form" class="bg-surface rounded-3xl border border-white/5 p-8 md:p-12 text-left">
         <input type="hidden" name="access_key" value="53babfba-9925-4570-99c5-2974a12ab85b">
